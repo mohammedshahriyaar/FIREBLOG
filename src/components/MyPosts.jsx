@@ -69,6 +69,7 @@ function MyPosts({ isAuth }) {
   const [userData, setUserData] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
   const [updatedContent, setUpdatedContent] = useState("");
+  const [editable,setEditable] = useState(false);
 
   const deletePost = (title) => {
     console.log("Delete post", title);
@@ -76,6 +77,7 @@ function MyPosts({ isAuth }) {
   };
 
   const updatePost = (title) => {
+    setEditable(true);
     setEditingPost(title);
     const postToUpdate = userData.find(
       (postObj) => postObj.data().title === title
@@ -160,9 +162,9 @@ function MyPosts({ isAuth }) {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M6 18L18 6M6 6l12 12"
                     ></path>
                   </svg>
@@ -171,13 +173,13 @@ function MyPosts({ isAuth }) {
             </div>
             <p className="text-3xl font-semibold mb-2">Content:</p>
             {editingPost === postObj.data().title ? (
-              <textarea
+              <textarea id="content"
                 value={updatedContent}
                 onChange={(e) => setUpdatedContent(e.target.value)}
-                className='border p-2 w-full mb-2'
+                className={`border p-2 w-full mb-2` }
               />
-
             ) : (
+              // <h1>hello</h1>
               <p className="text-lg">{postObj.data().postData}</p>
             )}
           </div>
@@ -187,3 +189,4 @@ function MyPosts({ isAuth }) {
 }
 
 export default MyPosts;
+
